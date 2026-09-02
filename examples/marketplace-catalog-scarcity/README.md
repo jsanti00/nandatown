@@ -71,7 +71,7 @@ scenarios/marketplace.yaml:35:    catalog_size: 200
 ```
 
 Three hits, all of them declarations. Not one read. `marketplace_factory` in
-`scenarios_builtin/marketplace.py:336` pulls exactly one key out of `task.config`:
+`packages/nest-core/nest_core/scenarios_builtin/marketplace.py:336` pulls exactly one key out of `task.config`:
 
 ```python
 task_config = config.task.config
@@ -90,7 +90,7 @@ is inert.
 
 **Scope check.** I scanned every `task.config` key across `scenarios/*.yaml` against the
 scenario sources. `catalog_size` is the only one with no reader. `network_partition.groups`
-looked inert by the same test but turned out to be read in `runner.py:159`, one layer up
+looked inert by the same test but turned out to be read in `packages/nest-core/nest_core/runner.py:159`, one layer up
 from the scenario factories, so it is a false positive from my grep, not a second bug.
 
 ## What I take from this
